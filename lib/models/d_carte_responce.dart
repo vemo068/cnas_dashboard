@@ -12,8 +12,8 @@ class DCarteResponce {
   factory DCarteResponce.fromJson(Map<String, dynamic> json) {
     return DCarteResponce(
       id: json['id'],
-      assureId: json['assure_id'],
-      numAssure: json['num_assure'],
+      assureId: json['assureId'],
+      numAssure: json['numAssure'],
     );
   }
 

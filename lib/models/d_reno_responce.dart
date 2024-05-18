@@ -12,16 +12,16 @@ class DRenoResponce {
   factory DRenoResponce.fromJson(Map<String, dynamic> json) {
     return DRenoResponce(
       id: json['id'],
-      assureId: json['assure_id'],
-      numAssure: json['num_assure'],
+      assureId: json['assureId'],
+      numAssure: json['numAssure'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['assure_id'] = this.assureId;
-    data['num_assure'] = this.numAssure;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['assure_id'] = assureId;
+    data['num_assure'] = numAssure;
     return data;
   }
 }
