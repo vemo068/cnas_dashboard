@@ -6,4 +6,7 @@ class DCarteController extends GetxController {
 void updateDemandeCarte(){
   
 }
+void activateCard(){
+  
+}
 }

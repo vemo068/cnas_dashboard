@@ -1,5 +1,7 @@
+import 'package:cnas_dashboard/pages/d_cartess_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +19,9 @@ class HomePage extends StatelessWidget {
           children: [
             MyButton(
               text: "Demandes des Cartes",
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const DemandeCartesPage());
+              },
             ),
             MyButton(
               text: "Demandes de renouvellement",
@@ -46,12 +50,16 @@ class MyButton extends StatelessWidget {
       onPressed: () {
         onPressed();
       },
-      child: Row(
-        children: [
-          Text(text),
-          const SizedBox(width: 5),
-          const Icon(CupertinoIcons.forward),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(text),
+            const SizedBox(width: 5),
+            const Icon(CupertinoIcons.forward),
+          ],
+        ),
       ),
     );
   }
