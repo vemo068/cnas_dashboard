@@ -12,7 +12,7 @@ class DemandCardDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Desktop App Page'),
+        title: const Text('Demande Details'),
         centerTitle: true,
       ),
       body: GetBuilder(

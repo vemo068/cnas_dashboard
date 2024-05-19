@@ -1,5 +1,6 @@
 import 'package:cnas_dashboard/controllers/d_carte_controller.dart';
 import 'package:cnas_dashboard/pages/d_cartess_page.dart';
+import 'package:cnas_dashboard/pages/d_reno_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,10 @@ class HomePage extends StatelessWidget {
                   ),
                   MyButton(
                     text: "Demandes de renouvellement",
-                    onPressed: () {},
+                    onPressed: () async {
+                      await demandesController.getAllRenoResponces();
+                      Get.to(() => DemandeRenosPage());
+                    },
                   ),
                 ],
               );
