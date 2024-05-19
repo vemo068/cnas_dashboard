@@ -7,3 +7,5 @@ String getDemandeRenoUrl = "${baseUrl}getTheDemandeReno";
 
 String refuseDemandeCardUrl = "${baseUrl}refuseDemandeCard";
 String refuseDemandeRenoUrl = "${baseUrl}refuseDemandeReno";
+
+String updateDateFinDroitUrl="${baseUrl}updateDateFinDroit";

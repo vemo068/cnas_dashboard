@@ -1,5 +1,6 @@
 import 'package:cnas_dashboard/components/my_button2.dart';
 import 'package:cnas_dashboard/controllers/d_carte_controller.dart';
+import 'package:cnas_dashboard/pages/d_reno_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,13 +36,16 @@ class BottomNavBarReno extends StatelessWidget {
                               ElevatedButton(
                                   onPressed: () async {
                                     await demandesController
-                                        .updateDateFinDroit(context);
+                                        .chooseDateFinDroit(context);
                                   },
                                   child: const Text("Update date fin droit"))
                             ],
                           ),
                           textConfirm: "Confirmer",
-                          onConfirm: () async {},
+                          onConfirm: () async {
+                            await demandesController.updateDateFinDroit();
+                            
+                          },
                         );
                       },
                       text: "Accepter",

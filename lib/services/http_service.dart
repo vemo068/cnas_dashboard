@@ -65,9 +65,9 @@ class HttpService {
     }
   }
 
-  Future<String> activateCardByIds(int assureId, int demandeId) async {
+  Future<String> activateCardByIds(int demandeId) async {
     final response = await http
-        .get(Uri.parse('${baseUrl}ActivateCard${assureId}/${demandeId}'));
+        .get(Uri.parse('${baseUrl}ActivateCard${demandeId}'));
 
     if (response.statusCode == 200) {
       return 'ok';
@@ -110,6 +110,25 @@ Future<String> refuseDemandeReno(int demandeId, String reason) async {
       throw Exception('Failed to refuse demande reno');
     }
   }
+
+
+
+Future<String> updateDateFinDroit(String dateFinDroit, int demandeId) async {
+    final response = await http.post(
+      Uri.parse(updateDateFinDroitUrl),
+      body: {
+        'dateFinDroit': dateFinDroit,
+        'demandeid': demandeId.toString(),
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to update date fin droit');
+    }
+  }
+
 
 
 }

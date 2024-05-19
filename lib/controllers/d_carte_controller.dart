@@ -2,6 +2,8 @@ import 'package:cnas_dashboard/models/d_carte_responce.dart';
 import 'package:cnas_dashboard/models/d_reno_responce.dart';
 import 'package:cnas_dashboard/models/demand_card.dart';
 import 'package:cnas_dashboard/models/demand_reno.dart';
+import 'package:cnas_dashboard/pages/d_cartess_page.dart';
+import 'package:cnas_dashboard/pages/d_reno_page.dart';
 import 'package:cnas_dashboard/services/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,12 +40,14 @@ class DemandesController extends GetxController {
     update();
   }
 
-  void updateDemandeCarte() {}
   Future<void> activateCard() async {
-    await HttpService().activateCardByIds(
-        selectedDemandeCard!.assure.idUser!, selectedDemandeCard!.id!);
+    await HttpService().activateCardByIds(selectedDemandeCard!.id!);
     await getAllDCarteResponces();
-    Get.back();
+    Get.off(() => DemandeCartesPage());
+    Get.snackbar(
+      "Succé",
+      "la Carte est activé",
+    );
     update();
   }
 
@@ -65,17 +69,32 @@ class DemandesController extends GetxController {
     update();
   }
 
-  Future<void> updateDateFinDroit(BuildContext context) async {
+  Future<void> chooseDateFinDroit(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDemandeReno!.assure.dateFinDroit,
       firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
+      lastDate: DateTime(2026),
     );
 
     if (picked != null && picked != selectedDateFinDroit) {
       selectedDateFinDroit = picked;
       date_controller.text = selectedDateFinDroit.toString();
+      update();
+    }
+  }
+
+  Future<void> updateDateFinDroit() async {
+    String res = await HttpService().updateDateFinDroit(
+        selectedDateFinDroit!.toIso8601String(), selectedDemandeReno!.id!);
+    if (res == "200") {
+      Get.snackbar(
+        "Succé",
+        "la nouvelle date fin droit est enregistré",
+      );
+      getAllRenoResponces();
+      Get.off(() => DemandeRenosPage());
+      selectedDateFinDroit = null;
       update();
     }
   }
