@@ -14,9 +14,9 @@ class HttpService {
       // If the server returns a 200 OK response, parse the JSON
       List<dynamic> jsonList = json.decode(response.body);
       List<DCarteResponce> demandes = [];
-      jsonList.forEach((json) {
+      for (var json in jsonList) {
         demandes.add(DCarteResponce.fromJson(json));
-      });
+      }
       return demandes;
     } else {
       // If the server returns an error response, throw an exception
@@ -24,7 +24,7 @@ class HttpService {
     }
   }
 
-   Future<DemandeCard> fetchDemandeCarteById(int id) async {
+  Future<DemandeCard> fetchDemandeCarteById(int id) async {
     final response = await http.get(Uri.parse('$getDemandeCardUrl$id'));
 
     if (response.statusCode == 200) {
@@ -35,10 +35,6 @@ class HttpService {
       throw Exception('Failed to load demandeCarte');
     }
   }
-
-
-
-
 
   Future<DemandeDeRenouvellement> fetchDemandeRenoById(int id) async {
     final response = await http.get(Uri.parse('$getDemandeRenoUrl$id'));
@@ -52,7 +48,6 @@ class HttpService {
     }
   }
 
-
   Future<List<DRenoResponce>> getAllDemandesDeReno() async {
     final response = await http.get(Uri.parse(getRenoDemandesResponcesUrl));
 
@@ -60,13 +55,61 @@ class HttpService {
       // If the server returns a 200 OK response, parse the JSON
       List<dynamic> jsonList = json.decode(response.body);
       List<DRenoResponce> demandes = [];
-      jsonList.forEach((json) {
+      for (var json in jsonList) {
         demandes.add(DRenoResponce.fromJson(json));
-      });
+      }
       return demandes;
     } else {
       // If the server returns an error response, throw an exception
       throw Exception('Failed to load demandes de reno');
     }
   }
+
+  Future<String> activateCardByIds(int assureId, int demandeId) async {
+    final response = await http
+        .get(Uri.parse('${baseUrl}ActivateCard${assureId}/${demandeId}'));
+
+    if (response.statusCode == 200) {
+      return 'ok';
+    } else {
+      throw Exception('Failed to activate card');
+    }
+  }
+
+
+
+Future<String> refuseDemandeCard(int demandeId, String reason) async {
+    final response = await http.post(
+      Uri.parse(refuseDemandeCardUrl),
+      body: {
+        'demandeid': demandeId.toString(),
+        'reason': reason,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return 'ok';
+    } else {
+      throw Exception('Failed to refuse demande card');
+    }
+  }
+
+
+Future<String> refuseDemandeReno(int demandeId, String reason) async {
+    final response = await http.post(
+      Uri.parse(refuseDemandeRenoUrl),
+      body: {
+        'demandeid': demandeId.toString(),
+        'reason': reason,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return 'ok';
+    } else {
+      throw Exception('Failed to refuse demande reno');
+    }
+  }
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:cnas_dashboard/components/my_button1.dart';
 import 'package:cnas_dashboard/controllers/d_carte_controller.dart';
 import 'package:cnas_dashboard/pages/d_cartess_page.dart';
 import 'package:cnas_dashboard/pages/d_reno_page.dart';
@@ -45,33 +46,4 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class MyButton extends StatelessWidget {
-  final Function onPressed;
-  final String text;
-  const MyButton({
-    required this.onPressed,
-    required this.text,
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoButton(
-      color: Colors.blue.shade900,
-      onPressed: () {
-        onPressed();
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(text),
-            const SizedBox(width: 5),
-            const Icon(CupertinoIcons.forward),
-          ],
-        ),
-      ),
-    );
-  }
-}
